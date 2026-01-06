@@ -52,19 +52,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nutri-Score: "
-                android:textSize="16sp" />
-
-            <TextView
                 android:id="@+id/txtNutri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="A"
+                android:text="@string/nutri_title"
+                android:textColor="#2E7D32"
                 android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="#2E7D32" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!-- Barre de séparation -->
@@ -94,7 +88,7 @@
                     android:id="@+id/txtNutrition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="📊 Valeurs nutritionnelles (100g)"
+                    android:text="@string/nutrition_title"
                     android:textColor="#455A64"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -104,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Calories : -- kcal"
+                    android:text="@string/nutrition_details_placeholder"
                     android:textSize="15sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -126,21 +120,22 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/txtIngredients"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🧾 Ingrédients"
+                    android:text="@string/ingredients_title"
                     android:textColor="#C62828"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtIngredients"
+                    android:id="@+id/txtIngredientsList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Liste des ingrédients..."
-                    android:textSize="14sp"
-                    android:lineSpacingExtra="4dp" />
+                    android:lineSpacingExtra="4dp"
+                    android:text="@string/ingredients_placeholder"
+                    android:textSize="14sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -163,7 +158,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⚠️ Allergènes"
+                    android:text="@string/allergens_title"
                     android:textColor="#B71C1C"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -173,7 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Aucun allergène détecté"
+                    android:text="@string/allergens_placeholder"
                     android:textColor="#B71C1C"
                     android:textSize="14sp" />
             </LinearLayout>

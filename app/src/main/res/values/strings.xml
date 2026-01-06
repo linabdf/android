@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">nutriscore</string>
+    <!-- Partie Nutri-Score -->
+    <string name="nutri_title">Nutri-Score : </string>
+
+<!-- Partie Valeurs Nutritionnelles -->
+    <string name="nutrition_title">
+        📊 Valeurs nutritionnelles (100g) :
+    </string>
+    <string name="nutrition_details_placeholder">
+         Calories : - kcal\n
+        Protéines : - g\n
+        Lipides : - g\n
+        Saturés : - g\n
+        Glucides : - g\n
+        Sucres : - g\n
+        Fibres : - g\n
+        Sel : - g
+    </string>
+
+    <!-- Partie Ingrédients -->
+    <string name="ingredients_title">
+        🧾 Ingrédients :
+    </string>
+    <string name="ingredients_placeholder">
+        Liste des ingrédients...
+    </string>
+
+    <!-- Partie Allergènes -->
+    <string name="allergens_title">
+        ⚠️ Allergènes :
+    </string>
+    <string name="allergens_placeholder">
+        Aucun allergène détecté
+    </string>
+
 </resources>

@@ -12,6 +12,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ProductActivity extends AppCompatActivity {
 
@@ -66,8 +70,7 @@ public class ProductActivity extends AppCompatActivity {
             String imageUrl = product.optString("image_url", "");
 
             // 🔹 Ingrédients & allergènes
-            String ingredients = product.optString("ingredients_text", "Non renseigné");
-            String allergens = product.optString("allergens", "Non renseigné");
+            String ingredientsWithAllergens = product.optString("ingredients_text_with_allergens", "Non renseigné");
 
             // 🔹 Valeurs nutritionnelles
             JSONObject nutriments = product.optJSONObject("nutriments");
@@ -83,15 +86,32 @@ public class ProductActivity extends AppCompatActivity {
 
             runOnUiThread(() -> {
 
-                txtName.setText("Nom : " + name);
-                txtNutri.setText("Nutri-Score : " + nutri.toUpperCase());
-                txtCalories.setText("Calories (100g) : " + calories);
-
-                txtIngredients.setText("Ingrédients :\n" + ingredients);
-                txtAllergens.setText("Allergènes :\n" + allergens);
+                txtName.setText(name);
+                txtNutri.setText(txtNutri.getText().toString() + " " + nutri.toUpperCase());
+                switch (nutri.toUpperCase()) {
+                    case "A":
+                        txtNutri.setTextColor(getResources().getColor(R.color.dark_green));
+                        break;
+                    case "B":
+                        txtNutri.setTextColor(getResources().getColor(R.color.light_green));
+                        break;
+                    case "C":
+                        txtNutri.setTextColor(getResources().getColor(R.color.yellow));
+                        break;
+                    case "D":
+                        txtNutri.setTextColor(getResources().getColor(R.color.dark_orange));
+                        break;
+                    case "E":
+                        txtNutri.setTextColor(getResources().getColor(R.color.red));
+                        break;
+                    default:
+                        txtNutri.setTextColor(getResources().getColor(R.color.black));
+                        break;
+                }
 
                 txtNutrition.setText(
-                        "Valeurs nutritionnelles (100g)\n" +
+                        txtNutrition.getText().toString() +"\n" +
+                                "Calories : " + calories + " kcal\n" +
                                 "Protéines : " + proteins + " g\n" +
                                 "Lipides : " + fat + " g\n" +
                                 "Saturés : " + saturatedFat + " g\n" +
@@ -100,6 +120,25 @@ public class ProductActivity extends AppCompatActivity {
                                 "Fibres : " + fiber + " g\n" +
                                 "Sel : " + salt + " g"
                 );
+
+                List<String> extractedContents = extractContent(ingredientsWithAllergens);
+
+                String ingredients = removeTags(ingredientsWithAllergens);
+
+                txtIngredients.setText(txtIngredients.getText().toString() + "\n" + ingredients);
+
+                StringBuilder allergens = new StringBuilder();
+                for (String content : extractedContents) {
+                    if (allergens.toString().isEmpty()) {
+                        allergens.append(content);
+                    }
+                    if (!allergens.toString().contains(content)) {
+                        allergens.append(", ").append(content);
+                    }
+                }
+
+                txtAllergens.setText("Allergènes :\n" + allergens);
+
 
                 if (!imageUrl.isEmpty()) {
                     Glide.with(ProductActivity.this)
@@ -111,6 +150,34 @@ public class ProductActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static List<String> extractContent(String input) {
+        // L'expression régulière pour capturer le contenu entre <span> et </span>
+        String regex = "<span[^>]*>(.*?)</span>";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+
+        List<String> contents = new ArrayList<>();
+
+        // Itérer sur toutes les correspondances trouvées
+        while (matcher.find()) {
+            // Le groupe 1 (group(1)) contient le texte capturé par (.*?)
+            contents.add(matcher.group(1));
+        }
+
+        return contents;
+    }
+
+    public static String removeTags(String input) {
+        // L'expression régulière pour correspondre à <span> ou </span>
+        String regex = "<span[^>]*>|</span>";
+
+        // On remplace toutes les occurrences par une chaîne vide ("")
+        String resultString = input.replaceAll(regex, "");
+
+        return resultString;
     }
 
 }
