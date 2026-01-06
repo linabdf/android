@@ -34,4 +34,13 @@
         Aucun allergène détecté
     </string>
 
+    <!-- Partie Profil -->
+    <string name="profile_title">
+        👤 \nVotre profil :
+    </string>
+    <string name="ageHint">Entrez votre âge</string>
+    <string name="tailleHint">Entrez votre taille (en cm)</string>
+    <string name="poidsHint">Entrez votre poids (en Kg)</string>
+
+
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="actPhys">
+        <item name="default">Choississez votre niveau d\'activité…</item>
+        <item name="sed">Sédentaire</item>
+        <item name="leg">Léger</item>
+        <item name="mod">Modéré</item>
+        <item name="int">Intense</item>
+        <item name="tint">Très Intense</item>
+    </string-array>
+
+</resources>

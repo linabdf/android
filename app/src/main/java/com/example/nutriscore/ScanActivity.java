@@ -4,7 +4,7 @@ package com.example.nutriscore;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
@@ -36,5 +36,12 @@ public class ScanActivity extends AppCompatActivity {
             options.setDesiredBarcodeFormats(ScanOptions.EAN_13);
             barcodeLauncher.launch(options);
         });
+
+        Button btnProfile = findViewById(R.id.btnProfileEdit);
+        btnProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfileEditActivity.class);
+            startActivity(intent);
+        });
+
     }
 }
